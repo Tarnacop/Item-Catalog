@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Items</title>
+
+    <link rel=stylesheet type=text/css href="{{url_for('static', filename='bootstrap/css/bootstrap.css')}}">
+    <link rel=stylesheet type=text/css href="{{url_for('static', filename='stylesheets/styles.css')}}">
+
+    <script type="text/javascript" src="{{url_for('static', filename = 'bootstrap/js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename = 'bootstrap/js/jquery-1.12.4.min.js')}}"></script>
+  </head>
+
+  <body>
+	<div class = "container>
+      <div class = "header">
+        {% if 'username' not in session %}
+        <a href="{{url_for('showLogin')}}">Login</a>
+        {% else %}
+        <a href="{{url_for('gdisconnect')}}">Disconnect</a>
+        {% endif %}
+      </div>
+
+      <h1 class = "text-center">Items</h1>
+      {% for item in items %}
+      <div class = "group text-center">
+          <a class = "name" href="{{url_for('showItem', category_id = item.category_id, item_id = item.id)}}">{{item.name}}</a>
+      </div>
+      {% endfor %}
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Edit Item</title>
+
+    <link rel=stylesheet type=text/css href="{{url_for('static', filename='bootstrap/css/bootstrap.css')}}">
+    <link rel=stylesheet type=text/css href="{{url_for('static', filename='stylesheets/styles.css')}}">
+
+    <script type="text/javascript" src="{{url_for('static', filename = 'bootstrap/js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename = 'bootstrap/js/jquery-1.12.4.min.js')}}"></script>
+  </head>
+
+  <body>
+
+    <div class = "container">
+
+      <div class = "header">
+        {% if 'username' not in session %}
+        <a href="{{url_for('showLogin')}}">Login</a>
+        {% else %}
+        <a href="{{url_for('gdisconnect')}}">Disconnect</a>
+        {% endif %}
+      </div>
+
+      <h1 class = "text-center">Edit item</h1>
+      <form action="{{url_for('editItem', category_id = item.category_id, item_id = item.id)}}" method = "post">
+        <label>
+          Name
+        </label>
+        <input type = "text" name="name" placeholder="{{item.name}}">
+        <label>
+          Description
+        </label>
+          <input type = "text" name="description" placeholder="{{item.description}}">
+          <input type = "submit" value="Edit">
+          <a href="{{url_for('showItem', category_id = item.category_id, item_id = item.id)}}">Cancel</a>
+      </form>
+    </div>
+
+  </body>
+</html>

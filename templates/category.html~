@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Categories</title>
+
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheets/styles.css') }}">
+
+    <script type="text/javascript" src="{{ url_for('static', filename = 'bootstrap/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'bootstrap/js/jquery-1.12.4.min.js') }}"></script>
+  </head>
+
+  <body>
+    <div class = "container">
+
+      <div class = "header">
+        {% if 'username' not in session %}
+        <a href="{{url_for('showLogin')}}">Login</a>
+        {% else %}
+        <a href="{{url_for('gdisconnect')}}">Disconnect</a>
+        {% endif %}
+      </div>
+
+      <h1 class = "text-center"> Categories </h1>
+
+		{% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul>
+        {% for message in messages %}
+        <li><strong>{{message}}></strong></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+
+      {% for category in categories %}
+      <div class = "group text-center">
+        <a class = "name" href="{{url_for('showItems', category_id = category.id)}}">{{category.name}}</a>
+      </div>
+      {% endfor %}
+    </div>
+
+  </body>
+
+</html>
